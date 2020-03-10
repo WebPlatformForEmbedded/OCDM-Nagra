@@ -1,2 +1,1 @@
-# OCDM-Nagra
-Nagra implementation (Nagra-Connect) for OpenCDM
+# Repo has been moved to https://github.com/rdkcentral/OCDM-Nagra
