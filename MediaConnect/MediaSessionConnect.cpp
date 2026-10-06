@@ -25,8 +25,8 @@ namespace {
 class MediaSystemLoader {
     public:
     MediaSystemLoader() 
-        : _SessionSystem(nullptr)
-        , _syslib("DRMNagraSystem.drm") {
+        : _syslib("DRMNagraSystem.drm")
+        , _SessionSystem(nullptr) {
 
         if (_syslib.IsLoaded() == true) {
             _SessionSystem = reinterpret_cast<CDMi::IMediaSessionSystem*(*)(const char*)>(_syslib.LoadFunction(_T("GetMediaSessionSystemInterface")));
@@ -46,7 +46,7 @@ class MediaSystemLoader {
   }
 
   private:
-    WPEFramework::Core::Library _syslib;
+    Thunder::Core::Library _syslib;
     CDMi::IMediaSessionSystem* (*_SessionSystem)(const char* systemsessionid);
 };
 
@@ -81,8 +81,8 @@ MediaSessionConnect::MediaSessionConnect(const uint8_t *data, uint32_t length)
     int32_t result = FindPSSHHeaderPrivateData(privatedata, length);
 
     if( result > 0 ) {
-        WPEFramework::Core::FrameType<0> frame(const_cast<uint8_t *>(privatedata), result, result);
-        WPEFramework::Core::FrameType<0>::Reader reader(frame, 0);
+        Thunder::Core::FrameType<0> frame(const_cast<uint8_t *>(privatedata), result, result);
+        Thunder::Core::FrameType<0>::Reader reader(frame, 0);
 
         constexpr uint8_t privatedatapart1size = sizeof(uint32_t) + sizeof(uint16_t);
 
@@ -164,8 +164,8 @@ void MediaSessionConnect::Run(const IMediaKeySessionCallback* callback) {
 void MediaSessionConnect::Update(const uint8_t *data, uint32_t length) {
     REPORT("enter MediaSessionConnect::Update");
 
-    WPEFramework::Core::FrameType<0> frame(const_cast<uint8_t *>(data), length, length);
-    WPEFramework::Core::FrameType<0>::Reader reader(frame, 0);
+    Thunder::Core::FrameType<0> frame(const_cast<uint8_t *>(data), length, length);
+    Thunder::Core::FrameType<0>::Reader reader(frame, 0);
 
     REPORT("NagraSytem update triggered");
 
@@ -243,7 +243,7 @@ CDMi_RESULT MediaSessionConnect::Decrypt(
     uint32_t f_cdwSubSampleMapping,
     const uint8_t *f_pbIV,
     uint32_t f_cbIV,
-    const uint8_t *payloadData,
+    uint8_t *payloadData,
     uint32_t payloadDataSize,
     uint32_t *f_pcbOpaqueClearContent,
     uint8_t **f_ppbOpaqueClearContent,

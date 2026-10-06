@@ -18,10 +18,12 @@
 
 #include "OperatorVault.h"
 
+using namespace Thunder;
+
 namespace CDMi {
 
 OperatorVault::OperatorVault(const string& path)
-    : _file(path) {
+    : _file(path, Core::File::USER_READ) {
 }
 
 string OperatorVault::LoadOperatorVault() const {

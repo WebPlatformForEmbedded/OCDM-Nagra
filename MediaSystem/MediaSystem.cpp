@@ -20,6 +20,8 @@
 #include <core/core.h>
 #include "../Report.h"
 
+using namespace Thunder;
+
 namespace CDMi {
 
 namespace {
@@ -59,7 +61,7 @@ namespace {
 class NagraSystem : public IMediaKeys {
 private:
 
-    class Config : public WPEFramework::Core::JSON::Container {
+    class Config : public Thunder::Core::JSON::Container {
     private:
         Config& operator= (const Config&);
 
@@ -80,8 +82,8 @@ private:
         }
 
     public:
-        WPEFramework::Core::JSON::String OperatorVaultPath;
-        WPEFramework::Core::JSON::String LicensePath;
+        Thunder::Core::JSON::String OperatorVaultPath;
+        Thunder::Core::JSON::String LicensePath;
     };
 
     NagraSystem& operator= (const NagraSystem&) = delete;
@@ -99,7 +101,7 @@ public:
     ~NagraSystem() {
     }
 
-   void OnSystemConfigurationAvailable(const std::string& configline) {
+   void Initialize(PluginHost::IShell* /* shell */,  const std::string& configline) {
         Config config; 
         config.FromString(configline);
         _operatorvaultpath = config.OperatorVaultPath.Value();

@@ -55,7 +55,7 @@ public:
         uint32_t f_cdwSubSampleMapping,
         const uint8_t *f_pbIV,
         uint32_t f_cbIV,
-        const uint8_t *f_pbData,
+        uint8_t *f_pbData,
         uint32_t f_cbData,
         uint32_t *f_pcbOpaqueClearContent,
         uint8_t **f_ppbOpaqueClearContent,
@@ -85,7 +85,7 @@ private:
     TNvSession _descramblingSession;
     uint32_t _TSID;
     IMediaSessionSystem* _systemsession;
-    WPEFramework::Core::CriticalSection _lock;
+    Thunder::Core::CriticalSection _lock;
 };
 
 } // namespace CDMi
